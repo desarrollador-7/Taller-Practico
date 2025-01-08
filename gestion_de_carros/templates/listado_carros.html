@@ -28,14 +28,15 @@
                     <td>{{carro.anio}}</td>
                     <td>{{carro.precio}}</td>
                     <td>{{carro.disponible}}</td>
-                    {% comment %} <td> 
+                    <td> 
                         <button class="eliminar" ><a  href="{% url 'eliminar_carro' carro.pk %}">Elimiar</a></button>
                         <button class="editar" ><a  href="{% url 'actualizar_carro' carro.pk %}">Editar</a></button>
-                    </td> {% endcomment %}
+                        <button class="leer" ><a  href="{% url 'vista_carro' carro.pk %}">Leer</a></button>
+                    </td>
                 </tbody>
             {% endfor %}
         </table>
-        <button ><a style="text-decoration: none; color: aliceblue;" href="{% url 'crear_carro'  %}">Crear Biblioteca</a></button>
+        <button><a style="text-decoration: none; color: aliceblue;" href="{% url 'crear_carro'  %}">Crear Carro</a></button>
     </div>
 </body>
 </html>

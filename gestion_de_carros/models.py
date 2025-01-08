@@ -4,7 +4,7 @@ class Carro(models.Model):
     
     MARCA = (
         ('TOYOTA', 'Toyota'),
-        ('FORD', 'Prueba'),
+        ('FORD', 'Ford'),
         ('CHEVROLET', 'Chevrolet'),
         ('NISSAN', 'Nissan'),
         ('BMW', 'Bmw'),
@@ -13,7 +13,7 @@ class Carro(models.Model):
     marca = models.CharField(max_length=50, verbose_name='Marca*', choices=MARCA)
     modelo = models.CharField(max_length=50, verbose_name = 'Modelo*') 
     anio = models.DateTimeField(verbose_name = 'Fecha de creacion*')
-    precio = models.IntegerField(max_length=50, verbose_name = 'Precio del carro*')
+    precio = models.IntegerField(verbose_name = 'Precio del carro*')
     disponible = models.BooleanField(verbose_name='¿Disponible?', default=True)
     
     class Meta: 

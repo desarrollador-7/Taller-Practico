@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Carro</title>
+    <link rel="stylesheet" href="{% static "eliminar_carro.css" %}">
+</head>
+<body>
+    <div class="div">
+        <h2>Eliminar  carros de la lista</h2>
+        <p>¿Estás seguro de eliminar a "{{carro.marca}}" de la lista de carros?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit"> Eliminar </button>
+            <a class="btn" href="{% url 'listado_carros'  %}">Cancelar</a>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView 
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from .models import *
 from .forms import *
 from django.contrib.auth.mixins import PermissionRequiredMixin
@@ -13,6 +13,12 @@ class ListaCarro(ListView):
     context_object_name = 'carros' 
     
 
+class VistaCarro(DetailView):
+    model = Carro
+    form_class = CarroForm
+    template_name = 'vista_carro.html'
+    success_url = reverse_lazy('carros')
+    
 class CrearCarro(CreateView):
     model = Carro
     form_class = CarroForm
