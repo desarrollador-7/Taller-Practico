@@ -1,0 +1,56 @@
+Enunciado del Ejercicio Práctico: CRUD con Django - Gestión de Autos
+
+Objetivo: Crear una aplicación web básica utilizando Django que implemente un sistema CRUD (Crear, Leer, Actualizar, Eliminar) para gestionar una lista de autos.
+
+Descripción del Proyecto:
+
+1. Nombre de la Aplicación:
+    
+    - `Gestión de Carros`
+2. Modelo Principal:
+    
+    - Crear un modelo llamado `Car` con los siguientes campos:
+        - `marca`: Lista de valores con una tupla llamada MARCA (Toyota, Ford, Nissan, Chevrolet, BMW ).
+        - `modelo`: Campo de texto para el modelo del auto (máximo 50 caracteres).
+        - `año`: Campo date para el año de fabricación del auto.
+        - `precio`: Campo decimal para el precio del auto.
+        - `disponible`: Campo booleano para indicar si el auto está disponible o no (por defecto: `True`).
+        
+3. Funcionalidades Requeridas:
+    
+    - Crear: Permitir a los usuarios agregar nuevos autos a través de un formulario.
+    - Leer: Mostrar una lista de todos los autos en la página principal, con la opción de ver detalles de un auto específico.
+    - Actualizar: Permitir la edición de los detalles de un auto existente.
+    - Eliminar: Permitir la eliminación de un auto existente con una confirmación previa.
+
+
+4. Interfaz de Usuario:
+    
+    - Utilizar plantillas de Django para renderizar las páginas.
+    - Incluir una página de inicio que liste todos los autos.
+    - Proveer enlaces para agregar, editar, ver detalles y eliminar autos.
+    - Implementar un diseño simple y moderno, opcionalmente utilizando Bootstrap.
+
+5. Rutas (URLs):
+    
+    - Página de inicio (`/`): Lista de todos los autos.
+    - Página de creación de auto (`/carro/create/`): Formulario para crear un nuevo auto.
+    - Página de detalles del auto (`/carro/<int:id>/`): Mostrar detalles de un auto específico.
+    - Página de edición del auto (`/carro/<int:id>/edit/`): Formulario para editar un auto existente.
+    - Acción de eliminación del auto (`/cars/<int:id>/delete/`): Eliminar un auto específico.
+
+6. Validaciones y Mensajes de Éxito/Error:
+    
+    - Validar que los campos `marca` y `modelo` no estén vacíos.
+    - Validar que el campo `año`  no sea  mayor al año actual.
+    - Mostrar mensajes de éxito o error después de realizar operaciones CRUD.
+
+7. Documentar cada una de las clase y funciones.
+	- Todas las clases deben estar documentadas con el formato ya mostrado anteriormente
+	- variables, funciones y clases escritas con el formato mencionado anteriormente. 
+
+
+Entrega:
+
+- Código fuente de la aplicación Django.
+- Instrucciones para ejecutar la aplicación localmente.
