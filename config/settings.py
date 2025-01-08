@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
+    'gestion_de_carros',
+    
 ]
 
 MIDDLEWARE = [
@@ -75,8 +78,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'gestion_de_carros',  # Cambia por el nombre de tu base de datos
+        'USER': 'postgres',                    # Cambia por el nombre de tu usuario de PostgreSQL
+        'PASSWORD': '1234',             # Cambia por tu contraseña
+        'HOST': 'localhost',                  # Cambia por el host si es necesario (por defecto, localhost)
+        'PORT': '5432',                       # Cambia el puerto si usas uno personalizado (por defecto, 5432)
     }
 }
 

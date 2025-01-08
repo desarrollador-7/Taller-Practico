@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Carro</title>
+    <link rel="stylesheet" href="{% static "crear_lista.css" %}">
+</head>
+<body>
+    <form method="post" action="{% if form.instance.pk %}{% url 'actualizar_carro' form.instance.pk %}{%else %}{% url 'crear_carro' %}{% endif %}">
+        <h1>{% if form.instance.pk %} Editar Carro {%else %} Crear Carro {% endif %}</h1> 
+        {%csrf_token%}
+        {{ form.as_p }}
+        <button type="submit">{% if form.instance.pk %} Editar Carro {%else %} Crear Carro {% endif %}</button>
+        <a class="btn" href="{% url 'listado_carros'  %}">Volver</a>
+    </form>
+</body>
+</html>
