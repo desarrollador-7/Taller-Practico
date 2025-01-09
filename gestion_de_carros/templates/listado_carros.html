@@ -25,7 +25,7 @@
                 <tbody>
                     <td>{{carro.marca}}</td>
                     <td>{{carro.modelo}}</td>
-                    <td>{{carro.anio}}</td>
+                    <td>{{carro.anio|date:'d-m-Y'|default:'...'}}</td>
                     <td>{{carro.precio}}</td>
                     <td>{{carro.disponible}}</td>
                     <td> 

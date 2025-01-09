@@ -26,7 +26,7 @@ class Carro(models.Model):
         )
     
     def __str__(self):
-        return + ' - ' + str(self.marca) + ' - ' + str(self.modelo) + ' - ' + str(self.anio) + ' - ' + str(self.precio) + ' - ' + str(self.disponible)
+        return + ' - ' + str(self.marca) + ' - ' + str(self.modelo) + ' - ' + str(self.anio) + ' - ' + str(self.precio) + ' - ' + str(self.disponible) # no colocar todos los campos. 
     
     @staticmethod
     def listado_carros():

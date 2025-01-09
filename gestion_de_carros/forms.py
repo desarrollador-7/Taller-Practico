@@ -4,6 +4,7 @@ from .models import *
 
 
 class CarroForm(forms.ModelForm):
+    #Cometarios del código
     class Meta:
         model = Carro
         fields = ['marca','modelo','anio','precio','disponible']
