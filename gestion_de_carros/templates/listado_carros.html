@@ -13,20 +13,26 @@
         <table>
             <thead>
                 <tr>
+                    <th>Placa</th>
                     <th>Marca</th>
                     <th>Modelo</th>
                     <th>Año</th>
+                    <th>Tipo</th>
                     <th>Precio</th>
+                    <th>kilometraje</th>
                     <th>disponible</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             {% for carro in carros %}
                 <tbody>
+                    <td>{{carro.placa}}</td>
                     <td>{{carro.marca}}</td>
                     <td>{{carro.modelo}}</td>
                     <td>{{carro.anio}}</td>
+                    <td>{{carro.tipo}}</td>
                     <td>{{carro.precio}}</td>
+                    <td>{{carro.kilometraje}}</td>
                     <td>{{carro.disponible}}</td>
                     <td> 
                         <button class="eliminar" ><a  href="{% url 'eliminar_carro' carro.pk %}">Elimiar</a></button>

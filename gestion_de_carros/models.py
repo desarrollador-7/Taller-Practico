@@ -10,11 +10,16 @@ class Carro(models.Model):
         ('BMW', 'Bmw'),
     )
     
+    placa = models.CharField(max_length=50, verbose_name = 'Placa*', blank=True, null=True) 
     marca = models.CharField(max_length=50, verbose_name='Marca*', choices=MARCA)
     modelo = models.CharField(max_length=50, verbose_name = 'Modelo*') 
     anio = models.DateTimeField(verbose_name = 'Fecha de creacion*')
+    color = models.CharField(max_length=50, verbose_name = 'Color*', blank=True, null=True) 
+    tipo = models.CharField(max_length=50, verbose_name = 'Tipo*', blank=True, null=True) 
     precio = models.IntegerField(verbose_name = 'Precio del carro*')
+    kilometraje = models.FloatField(max_length=50, verbose_name = 'Kilometraje*', blank=True, null=True) 
     disponible = models.BooleanField(verbose_name='¿Disponible?', default=True)
+    
     
     class Meta: 
         default_permissions = ()
@@ -26,7 +31,7 @@ class Carro(models.Model):
         )
     
     def __str__(self):
-        return + ' - ' + str(self.marca) + ' - ' + str(self.modelo) + ' - ' + str(self.anio) + ' - ' + str(self.precio) + ' - ' + str(self.disponible)
+        return + ' - ' + str(self.marca) + ' - ' + str(self.modelo) + ' - ' + str(self.disponible)
     
     @staticmethod
     def listado_carros():
