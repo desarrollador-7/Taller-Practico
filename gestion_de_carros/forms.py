@@ -3,7 +3,7 @@ from .models import *
 
 
 
-class CarroForm(forms.ModelForm):
+class CarroForm(forms.ModelForm): 
     class Meta:
         model = Carro
         fields = ['placa','marca','modelo','anio','color','tipo','precio','kilometraje','disponible']

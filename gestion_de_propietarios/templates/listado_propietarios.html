@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Propietarios</title>
+    <link rel="stylesheet" href="{% static "carros_lista.css" %}">
+</head>
+<body>
+    <div>
+        <h1>Listado De Propietarios</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Identificacion</th>
+                    <th>Placa</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Direccion</th>
+                    <th>Telefono</th>
+                    <th>Email</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            {% for propietario in propietarios %}
+                <tbody>
+                    <td>{{propietario.dni}}</td>
+                    <td>{{propietario.placa}}</td>
+                    <td>{{propietario.nombre}}</td>
+                    <td>{{propietario.apellido}}</td>
+                    <td>{{propietario.direccion}}</td>
+                    <td>{{propietario.telefono}}</td>
+                    <td>{{propietario.email}}</td>
+                    <td> 
+                        <button class="eliminar" ><a  href="{% url 'eliminar_propietario' propietario.pk %}">Elimiar</a></button>
+                        <button class="editar" ><a  href="{% url 'actualizar_propietario' propietario.pk %}">Editar</a></button>
+                        <button class="leer" ><a  href="{% url 'vista_propietario' propietario.pk %}">Leer</a></button>
+                    </td>
+                </tbody>
+            {% endfor %}
+        </table>
+        <button><a style="text-decoration: none; color: aliceblue;" href="{% url 'crear_propietario'  %}">Crear Propietario</a></button>
+    </div>
+</body>
+</html>
