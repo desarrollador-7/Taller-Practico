@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Carro</title>
+    <link rel="stylesheet" href="{% static "vista.css" %}">
+</head>
+<body>
+    <div>
+        <h1>Detalles del Carro</h1>
+        <ul class="lista">
+            <li>Identificacion: {{ propietario.dni }}</li>
+            <li>Placa: {{ propietario.placa }}</li>
+            <li>Nombre: {{ propietario.nombre }}</li>
+            <li>Año: {{ propietario.apellido }}</li>
+            <li>Tipo: {{ propietario.direccion }}</li>
+            <li>Precio: {{ propietario.telefono }}</li>
+            <li>Kilometraje: {{ propietario.email }}</li>
+        </ul>
+        <button class="button"><a style="text-decoration: none; color: aliceblue;" href="{% url 'listado_propietarios' %}">Volver al listado</a></button>
+    </div>
+</body>
+</html>

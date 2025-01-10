@@ -8,27 +8,33 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 
 
 class ListaCarro(ListView):
-    
-    """Clase para la lista de un objeto
-    """    
-    
+    """_summary_
+
+    :param ListView: _description_
+    :type ListView: _type_
+    """       
+        
     model = Carro
     template_name = 'listado_carros.html'
     context_object_name = 'carros' 
     
 
 class VistaCarro(DetailView):
-    
-    """Clase para la vista de un objeto
+    """_summary_
+
+    :param DetailView: _description_
+    :type DetailView: _type_
     """    
-    
+
     model = Carro
     template_name = 'vista_carro.html'
     success_url = reverse_lazy('carros')
     
 class CrearCarro(CreateView):
-    
-    """Clase para la creacion de un objeto
+    """_summary_
+
+    :param CreateView: _description_
+    :type CreateView: _type_
     """    
     
     model = Carro
@@ -37,9 +43,11 @@ class CrearCarro(CreateView):
     success_url = reverse_lazy('listado_carros')
     
 class ActualizarCarro(UpdateView):
-    
-    """Clase para la edicion de un objeto
-    """    
+    """_summary_
+
+    :param UpdateView: _description_
+    :type UpdateView: _type_
+    """       
     
     model = Carro
     form_class = CarroForm
@@ -48,9 +56,11 @@ class ActualizarCarro(UpdateView):
     
     
 class EliminarCarro(DeleteView):
-    
-    """Clase para la eliminacion de un objeto
-    """    
+    """_summary_
+
+    :param DeleteView: _description_
+    :type DeleteView: _type_
+    """       
     
     model = Carro
     template_name = 'eliminar_carro.html'

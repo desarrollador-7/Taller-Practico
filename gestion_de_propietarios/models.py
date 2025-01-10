@@ -13,7 +13,6 @@ class Propietario(models.Model):
     
     
     class Meta:
-        
         """Clase para la creacion de permisos
         """         
         
@@ -26,7 +25,7 @@ class Propietario(models.Model):
         )
     
     def __str__(self):
-        return + ' - ' + str(self.dni) + ' - ' + str(self.email) + ' - ' + str(self.placa.placa)
+        return str(self.dni) + ' - ' + str(self.email) + ' - ' + str(self.placa.placa)
     
     def mostrar_placa(self):
         return str(self.placa.placa)

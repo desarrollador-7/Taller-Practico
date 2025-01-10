@@ -4,8 +4,8 @@ class Carro(models.Model):
     
     """Clase modelo Carro para el registro de datos de un carro.
 
-    :return: Muestra los datos guardados de un vehiculo
-    :rtype: models.model
+    :return: Administrar datos de un vehiculo
+    :rtype: Objeto
     """    
     
     MARCA = (
@@ -46,7 +46,7 @@ class Carro(models.Model):
         )
     
     def __str__(self):
-        return + ' - ' + str(self.marca) + ' - ' + str(self.placa) + ' - ' + str(self.disponible)
+        return  str(self.marca) + ' - ' + str(self.placa) + ' - ' + str(self.disponible)
     
     @staticmethod
     def listado_carros():
