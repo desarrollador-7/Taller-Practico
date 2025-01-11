@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Multas</title>
+    <link rel="stylesheet" href="{% static "carros_lista.css" %}">
+</head>
+<body>
+    <div>
+        <h1>Listado De Multas</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Placa</th>
+                    <th>Fecha</th>
+                    <th>Infraccion</th>
+                    <th>Monto</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            {% for multa in multas %}
+                <tbody>
+                    <td>{{multa.id}}</td>
+                    <td>{{multa.placa}}</td>
+                    <td>{{multa.fecha|date:'d-m-Y'|default:'...'}}</td>
+                    <td>{{multa.infraccion}}</td>
+                    <td>{{carro.monto}}</td>
+                    <td>{{carro.estado}}</td>
+                    <td> 
+                        <button class="eliminar" ><a  href="{% url 'eliminar_multa' multa.pk %}">Elimiar</a></button>
+                        <button class="editar" ><a  href="{% url 'actualizar_multa' multa.pk %}">Editar</a></button>
+                        <button class="leer" ><a  href="{% url 'vista_multa' multa.pk %}">Leer</a></button>
+                    </td>
+                </tbody>
+            {% endfor %}
+        </table>
+        <button><a style="text-decoration: none; color: aliceblue;" href="{% url 'crear_multa'  %}">Crear Carro</a></button>
+    </div>
+</body>
+</html>

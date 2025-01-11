@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'gestion_de_carros',
     'gestion_de_propietarios',
+    'gestion_de_multas',
     
 ]
 

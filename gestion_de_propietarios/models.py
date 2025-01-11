@@ -1,7 +1,13 @@
 from django.db import models
 from gestion_de_carros.models import Carro
-
 class Propietario(models.Model):
+    """Clase modelo Propietario para el registro de datos de un carro.
+
+    :param models: Abministrar datos de propietarios.
+    :type models: Objeto
+    :return: Una instancia de la clase Propietario con los datos registrados
+    :rtype: Propietario
+    """    
     
     dni = models.CharField(max_length=50, verbose_name = 'Identificacion*')
     placa = models.ForeignKey(Carro, on_delete=models.PROTECT, verbose_name = 'Placa*')   
@@ -11,6 +17,43 @@ class Propietario(models.Model):
     telefono = models.IntegerField(verbose_name = 'Telefono*') 
     email = models.EmailField(max_length=50, verbose_name = 'Email*')
     
+    class Meta:
+        """Clase para la creacion de permisos
+        """         
+        
+        default_permissions = ()
+        permissions = (
+            ('crear_propietario', 'Puede Crear Propietarios'),
+            ('vista_propietario', 'Puede Consultar Propietarios'),
+            ('actualizar_propietario', 'Puede Actualizar Propietarios'),
+            ('eliminar_propietario', 'Puede Eliminar Propietarios'),  
+        )
+    
+    def __str__(self):
+        return str(self.nombre)
+
+class Licencia(models.Model):
+    """Clase modelo Licencia para el registro de datos de un Propietario.
+
+    :param models: Abministrar datos de licencias.
+    :type models: Objeto
+    :return: Una instancia de la clase Licencia con los datos registrados
+    :rtype: Licencia
+    """    
+    
+    TIPO = (
+        ('PRIVADO', 'Privado'),
+        ('PUBLICO', 'Publico'),
+    )
+    
+    numero = models.CharField(max_length=50, verbose_name = 'N.Licencia*')
+    dni = models.ForeignKey(Propietario, on_delete=models.PROTECT, verbose_name = 'Identificacion*')   
+    nombre = models.ForeignKey(Propietario, on_delete=models.PROTECT, verbose_name = 'Nombre*')
+    tipo = models.CharField(max_length=50, verbose_name = 'Tipo*', choices=TIPO)
+    fecha_emision = models.DateTimeField(verbose_name = 'Fecha de emision*')
+    fecha_vencimiento = models.DateTimeField(verbose_name = 'Fecha de vencimiento*')
+    estado = models.BooleanField(verbose_name='¿Activo?', default=True)
+    
     
     class Meta:
         """Clase para la creacion de permisos
@@ -18,17 +61,14 @@ class Propietario(models.Model):
         
         default_permissions = ()
         permissions = (
-            ('crear_carro', 'Puede Crear Carros'),
-            ('consultar_carros', 'Puede Consultar Carros'),
-            ('editar_carros', 'Puede Editar Carros'),
-            ('eliminar_carros', 'Puede Eliminar Carros'),  
+            ('crear_licencia', 'Puede Crear licencia'),
+            ('ver_licencia', 'Puede Consultar Licencias'),
+            ('actualizar_licencia', 'Puede Actualizar Licencia'),
+            ('eliminar_licencia', 'Puede Eliminar Licencia'),  
         )
-    
+        
     def __str__(self):
-        return str(self.dni) + ' - ' + str(self.email) + ' - ' + str(self.placa.placa)
-    
-    def mostrar_placa(self):
-        return str(self.placa.placa)
+        return str(self.dni.dni) + ' - ' + str(self.nombre.nombre) + ' - ' + str(self.estado)
     
     @staticmethod
     def listado_propietarios():

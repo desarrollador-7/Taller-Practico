@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Propietarios</title>
+    <link rel="stylesheet" href="{% static "carros_lista.css" %}">
+</head>
+<body>
+    <div>
+        <h1>Listado De Licencias</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Numero</th>
+                    <th>Identificacion</th>
+                    <th>Nombre</th>
+                    <th>Tipo</th>
+                    <th>Fecha de emision</th>
+                    <th>Fecha de vencimiento</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            {% for licencia in licencias %}
+                <tbody>
+                    <td>{{licencia.numero}}</td>
+                    <td>{{licencia.dni}}</td>
+                    <td>{{licencia.nombre}}</td>
+                    <td>{{licencia.tipo}}</td>
+                    <td>{{licencia.fecha_emision|date:'d-m-Y'|default:'...'}}</td>
+                    <td>{{licencia.fecha_vencimiento|date:'d-m-Y'|default:'...'}}</td>
+                    <td>{{licencia.estado}}</td>
+                    <td> 
+                        <button class="eliminar" ><a  href="{% url 'eliminar_licencia' licencia.pk %}">Elimiar</a></button>
+                        <button class="editar" ><a  href="{% url 'actualizar_licencia' licencia.pk %}">Editar</a></button>
+                        <button class="leer" ><a  href="{% url 'vista_licencia' licencia.pk %}">Leer</a></button>
+                    </td>
+                </tbody>
+            {% endfor %}
+        </table>
+        <button><a style="text-decoration: none; color: aliceblue;" href="{% url 'crear_licencia'  %}">Crear Licencia</a></button>
+    </div>
+</body>
+</html>

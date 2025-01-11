@@ -1,11 +1,12 @@
 from django.db import models
 
 class Carro(models.Model):
-    
     """Clase modelo Carro para el registro de datos de un carro.
-
-    :return: Administrar datos de un vehiculo
-    :rtype: Objeto
+    
+    :param models: Administrar datos de un vehiculo
+    :type models: Objeto
+    :return: Una instancia de la clase Carro con los datos registrados
+    :rtype: Carro
     """    
     
     MARCA = (
@@ -39,10 +40,10 @@ class Carro(models.Model):
         
         default_permissions = ()
         permissions = (
-            ('crear_carro', 'Puede Crear Carros'),
-            ('consultar_carros', 'Puede Consultar Carros'),
-            ('editar_carros', 'Puede Editar Carros'),
-            ('eliminar_carros', 'Puede Eliminar Carros'),  
+            ('crear_carro', 'Puede Crear Carro'),
+            ('ver_carro', 'Puede Consultar Carro'),
+            ('actualizar_carros', 'Puede Actualizar Carro'),
+            ('eliminar_carro', 'Puede Eliminar Carro'),  
         )
     
     def __str__(self):

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles de Licencia</title>
+    <link rel="stylesheet" href="{% static "vista.css" %}">
+</head>
+<body>
+    <div>
+        <h1>Detalles de la Licencia</h1>
+        <ul class="lista">
+            <li>Numero: {{licencia.numero}}</li>
+            <li>Identificacion: {{licencia.dni}}</li>
+            <li>Nombre: {{licencia.nombre}}</li>
+            <li>tipo: {{licencia.tipo}}</li>
+            <li>Fecha emision: {{licencia.fecha_emision|date:'d-m-Y'|default:'...'}}</li>
+            <li>Fecha vencimiento: {{licencia.fecha_vencimiento|date:'d-m-Y'|default:'...'}}</li>
+            <li>Estado: {{licencia.estado}}</li>
+        </ul>
+        <button class="button"><a style="text-decoration: none; color: aliceblue;" href="{% url 'listado_licencias' %}">Volver al listado</a></button>
+    </div>
+</body>
+</html>
