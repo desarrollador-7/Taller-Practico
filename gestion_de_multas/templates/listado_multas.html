@@ -24,12 +24,12 @@
             </thead>
             {% for multa in multas %}
                 <tbody>
-                    <td>{{multa.id}}</td>
+                    <td>{{multa.dni}}</td>
                     <td>{{multa.placa}}</td>
                     <td>{{multa.fecha|date:'d-m-Y'|default:'...'}}</td>
                     <td>{{multa.infraccion}}</td>
-                    <td>{{carro.monto}}</td>
-                    <td>{{carro.estado}}</td>
+                    <td>{{multa.monto}}</td>
+                    <td>{{multa.estado}}</td>
                     <td> 
                         <button class="eliminar" ><a  href="{% url 'eliminar_multa' multa.pk %}">Elimiar</a></button>
                         <button class="editar" ><a  href="{% url 'actualizar_multa' multa.pk %}">Editar</a></button>

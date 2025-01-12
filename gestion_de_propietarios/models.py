@@ -48,7 +48,6 @@ class Licencia(models.Model):
     
     numero = models.CharField(max_length=50, verbose_name = 'N.Licencia*')
     dni = models.ForeignKey(Propietario, on_delete=models.PROTECT, verbose_name = 'Identificacion*')   
-    nombre = models.ForeignKey(Propietario, on_delete=models.PROTECT, verbose_name = 'Nombre*')
     tipo = models.CharField(max_length=50, verbose_name = 'Tipo*', choices=TIPO)
     fecha_emision = models.DateTimeField(verbose_name = 'Fecha de emision*')
     fecha_vencimiento = models.DateTimeField(verbose_name = 'Fecha de vencimiento*')

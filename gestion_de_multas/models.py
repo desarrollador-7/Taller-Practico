@@ -10,7 +10,7 @@ class Multas(models.Model):
     :rtype: Multa
     """  
     
-    id = models.CharField(max_length=50, verbose_name = 'Id*') 
+    dni = models.CharField(max_length=50, verbose_name = 'Id*') 
     placa = models.ForeignKey(Carro, on_delete=models.PROTECT, verbose_name = 'Placa*')
     fecha = models.DateTimeField(verbose_name = 'Fecha*')
     infraccion = models.PositiveIntegerField(verbose_name = 'Infraccion*')
@@ -31,7 +31,7 @@ class Multas(models.Model):
         )
     
     def __str__(self):
-        return  str(self.id) + ' - ' + str(self.placa.placa) + ' - ' + str(self.estado)
+        return  str(self.dni) + ' - ' + str(self.placa.placa) + ' - ' + str(self.estado)
     
     @staticmethod
     def listado_multas():

@@ -12,7 +12,7 @@ class PropietarioForm(forms.ModelForm):
 class LicenciaForm(forms.ModelForm): 
     class Meta:
         model = Licencia
-        fields = ['numero','dni','nombre','tipo','fecha_emision','fecha_vencimiento','estado']
+        fields = ['numero','dni','tipo','fecha_emision','fecha_vencimiento','estado']
         widgets = {
             'fecha_emision': forms.DateInput(attrs={'type': 'date'}, format='%Y-%m-%d'),
             'fecha_vencimiento': forms.DateInput(attrs={'type': 'date'}, format='%Y-%m-%d'),
