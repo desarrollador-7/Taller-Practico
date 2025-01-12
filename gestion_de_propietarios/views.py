@@ -77,7 +77,6 @@ class EliminarPropietario(DeleteView):
 
 
 ####--------Licencia--------####
-
 class ListaLicencia(ListView):
     """Clase para proporcionar una vista que muestra una lista de objetos.
 

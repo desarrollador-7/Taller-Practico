@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Aseguradoras</title>
+    <link rel="stylesheet" href="{% static "carros_lista.css" %}">
+</head>
+<body>
+    <div>
+        <h1>Listado De Aseguradoras</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Direccion</th>
+                    <th>Telefono</th>
+                    <th>Email</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            {% for aseguradora in aseguradoras %}
+                <tbody>
+                    <td>{{aseguradora.id_aseguradora}}</td>
+                    <td>{{aseguradora.nombre}}</td>
+                    <td>{{aseguradora.direccion}}</td>
+                    <td>{{aseguradora.telefono}}</td>
+                    <td>{{aseguradora.email}}</td>
+                    <td> 
+                        <button class="eliminar" ><a  href="{% url 'eliminar_aseguradora' aseguradora.pk %}">Elimiar</a></button>
+                        <button class="editar" ><a  href="{% url 'actualizar_aseguradora' aseguradora.pk %}">Editar</a></button>
+                        <button class="leer" ><a  href="{% url 'vista_aseguradora' aseguradora.pk %}">Leer</a></button>
+                    </td>
+                </tbody>
+            {% endfor %}
+        </table>
+        <button><a style="text-decoration: none; color: aliceblue;" href="{% url 'crear_aseguradora'  %}">Crear Carro</a></button>
+    </div>
+</body>
+</html>

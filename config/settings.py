@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'gestion_de_carros',
     'gestion_de_propietarios',
     'gestion_de_multas',
+    'gestion_de_seguros',
     
 ]
 

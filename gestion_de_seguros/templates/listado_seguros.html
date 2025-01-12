@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Aseguradoras</title>
+    <link rel="stylesheet" href="{% static "carros_lista.css" %}">
+</head>
+<body>
+    <div>
+        <h1>Listado De Seguros</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Placa</th>
+                    <th>Id aseguradora</th>
+                    <th>Fecha de inicio</th>
+                    <th>Fecha Final</th>
+                    <th>Costo</th>
+                    <th>Tipo Cobertura</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            {% for seguro in seguros %}
+                <tbody>
+                    <td>{{seguro.dni}}</td>
+                    <td>{{seguro.placa}}</td>
+                    <td>{{seguro.id_aseguradora}}</td>
+                    <td>{{seguro.fecha_inicio|date:'d-m-Y'|default:'...'}}</td>
+                    <td>{{seguro.fecha_fin|date:'d-m-Y'|default:'...'}}</td>
+                    <td>{{seguro.costo}}</td>
+                    <td>{{seguro.tipo_cobertura}}</td>
+                    <td>{{seguro.estado}}</td>
+                    <td> 
+                        <button class="eliminar" ><a  href="{% url 'eliminar_seguro' seguro.pk %}">Elimiar</a></button>
+                        <button class="editar" ><a  href="{% url 'actualizar_seguro' seguro.pk %}">Editar</a></button>
+                        <button class="leer" ><a  href="{% url 'vista_seguro' seguro.pk %}">Leer</a></button>
+                    </td>
+                </tbody>
+            {% endfor %}
+        </table>
+        <button><a style="text-decoration: none; color: aliceblue;" href="{% url 'crear_seguro'  %}">Crear seguro</a></button>
+    </div>
+</body>
+</html>
