@@ -5,6 +5,7 @@
     {% load static %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listar Talleres</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{% static "listado.css" %}">
 </head>
 <body>
@@ -29,9 +30,14 @@
                     <td>{{taller.telefono}}</td>
                     <td>{{taller.especializacion}}</td>
                     <td> 
-                        <button class="eliminar" ><a  href="{% url 'eliminar_taller' taller.pk %}">Elimiar</a></button>
-                        <button class="editar" ><a  href="{% url 'actualizar_taller' taller.pk %}">Editar</a></button>
-                        <button class="leer" ><a  href="{% url 'vista_taller' taller.pk %}">Leer</a></button>
+                        <a href="{% url 'eliminar_taller' taller.pk %}" class="action-link delete-link">
+                            <i class="bi bi-trash3-fill"></i>
+                        </a>
+                        <a href="{% url 'actualizar_taller' taller.pk %}" class="action-link edit-link">
+                            <i class="bi bi-pencil-fill"></i>
+                        </a>
+                        <a href="{% url 'vista_taller' taller.pk %}" class="action-link read-link">
+                            <i class="bi bi-eye-fill"></i>
                     </td>
                 </tbody>
             {% endfor %}
