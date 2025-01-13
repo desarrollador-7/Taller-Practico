@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Manteniminto</title>
+    <link rel="stylesheet" href="{% static "vista.css" %}">
+</head>
+<body>
+    <div>
+        <h1>Detalles del Mantenimiento</h1>
+        <ul class="lista">
+            <li>Id: {{mantenimiento.idn}}</li>
+            <li>Nombre: {{mantenimiento.placa}}</li>
+            <li>Direccion: {{mantenimiento.id_taller}}</li>
+            <li>Telefono: {{mantenimiento.fecha}}</li>
+            <li>Especializacion: {{mantenimiento.tipo_servicio}}</li>
+            <li>Direccion: {{mantenimiento.costo}}</li>
+            <li>Telefono: {{mantenimiento.descripcion}}</li>
+            <li>Telefono: {{mantenimiento.estado}}</li>
+        </ul>
+        <button class="button"><a style="text-decoration: none; color: aliceblue;" href="{% url 'listado_mantenimientos' %}">Volver al listado</a></button>
+    </div>
+</body>
+</html>

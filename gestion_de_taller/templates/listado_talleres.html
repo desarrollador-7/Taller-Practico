@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Talleres</title>
+    <link rel="stylesheet" href="{% static "listado.css" %}">
+</head>
+<body>
+    <div>
+        <h1>Listado De Talleres</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Direccion</th>
+                    <th>Telefono</th>
+                    <th>Especializacion</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            {% for taller in talleres %}
+                <tbody>
+                    <td>{{taller.idn}}</td>
+                    <td>{{taller.nombre}}</td>
+                    <td>{{taller.direccion}}</td>
+                    <td>{{taller.telefono}}</td>
+                    <td>{{taller.especializacion}}</td>
+                    <td> 
+                        <button class="eliminar" ><a  href="{% url 'eliminar_taller' taller.pk %}">Elimiar</a></button>
+                        <button class="editar" ><a  href="{% url 'actualizar_taller' taller.pk %}">Editar</a></button>
+                        <button class="leer" ><a  href="{% url 'vista_taller' taller.pk %}">Leer</a></button>
+                    </td>
+                </tbody>
+            {% endfor %}
+        </table>
+        <button><a style="text-decoration: none; color: aliceblue;" href="{% url 'crear_taller'  %}">Crear Taller</a></button>
+    </div>
+</body>
+</html>

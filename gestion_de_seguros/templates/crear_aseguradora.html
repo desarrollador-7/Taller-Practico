@@ -5,7 +5,7 @@
     {% load static %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Aseguradora</title>
-    <link rel="stylesheet" href="{% static "crear_lista.css" %}">
+    <link rel="stylesheet" href="{% static "crear_gestion.css" %}">
 </head>
 <body>
     <form class="form" method="post" action="{% if form.instance.pk %}{% url 'actualizar_aseguradora' form.instance.pk %}{%else %}{% url 'crear_aseguradora' %}{% endif %}">

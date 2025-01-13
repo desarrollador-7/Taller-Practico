@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Mantenimiento</title>
+    <link rel="stylesheet" href="{% static "listado.css" %}">
+</head>
+<body>
+    <div>
+        <h1>Listado De Mantenimiento</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Placa</th>
+                    <th>Taller</th>
+                    <th>Fecha</th>
+                    <th>Servicio</th>
+                    <th>Costo</th>
+                    <th>Descripcion</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            {% for mantenimiento in mantenimientos %}
+                <tbody>
+                    <td>{{mantenimiento.idn}}</td>
+                    <td>{{mantenimiento.placa}}</td>
+                    <td>{{mantenimiento.id_taller}}</td>
+                    <td>{{mantenimiento.fecha|date:'d-m-Y'|default:'...'}}</td>
+                    <td>{{mantenimiento.tipo_servicio}}</td>
+                    <td>{{mantenimiento.costo}}</td>
+                    <td>{{mantenimiento.descripcion}}</td>
+                    <td>{{mantenimiento.estado}}</td>
+                    <td> 
+                        <button class="eliminar" ><a  href="{% url 'eliminar_mantenimiento' mantenimiento.pk %}">Elimiar</a></button>
+                        <button class="editar" ><a  href="{% url 'actualizar_mantenimiento' mantenimiento.pk %}">Editar</a></button>
+                        <button class="leer" ><a  href="{% url 'vista_mantenimiento' mantenimiento.pk %}">Leer</a></button>
+                    </td>
+                </tbody>
+            {% endfor %}
+        </table>
+        <button><a style="text-decoration: none; color: aliceblue;" href="{% url 'crear_mantenimiento'  %}">Crear Mantenimiento</a></button>
+    </div>
+</body>
+</html>

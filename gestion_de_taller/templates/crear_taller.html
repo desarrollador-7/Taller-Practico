@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Taller</title>
+    <link rel="stylesheet" href="{% static "crear.css" %}">
+</head>
+<body>
+    <form class="form" method="post" action="{% if form.instance.pk %}{% url 'actualizar_taller' form.instance.pk %}{%else %}{% url 'crear_taller' %}{% endif %}">
+        <h1>{% if form.instance.pk %} Editar Taller {%else %} Crear Taller {% endif %}</h1> 
+        {%csrf_token%}
+        {{ form.as_p }}
+        <button type="submit">{% if form.instance.pk %} Editar Taller {%else %} Crear Taller {% endif %}</button>
+        <a class="btn" href="{% url 'listado_talleres'  %}">Volver</a>
+    </form>
+</body>
+</html>

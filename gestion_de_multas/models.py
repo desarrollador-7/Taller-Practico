@@ -13,7 +13,7 @@ class Multas(models.Model):
     dni = models.CharField(max_length=50, verbose_name = 'Id*') 
     placa = models.ForeignKey(Carro, on_delete=models.PROTECT, verbose_name = 'Placa*')
     fecha = models.DateTimeField(verbose_name = 'Fecha*')
-    infraccion = models.PositiveIntegerField(verbose_name = 'Infraccion*')
+    infraccion = models.CharField(max_length=50, verbose_name = 'Infraccion*')
     monto = models.PositiveIntegerField(verbose_name = 'Monto*')
     estado = models.BooleanField(verbose_name='¿Activo?', default=True) 
     
