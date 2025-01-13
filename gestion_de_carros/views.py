@@ -5,6 +5,8 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView, D
 from .models import *
 from .forms import *
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
 
 
 class ListaCarro(ListView):
@@ -29,8 +31,8 @@ class VistaCarro(DetailView):
     model = Carro
     template_name = 'vista_carro.html'
     success_url = reverse_lazy('carros')
-    
-class CrearCarro(CreateView):
+
+class CrearCarro(SuccessMessageMixin, CreateView):
     """Clase que permite la creación de un nuevo objeto en la base de datos.
 
     :param CreateView: Maneja la creacion de objetos
@@ -41,8 +43,14 @@ class CrearCarro(CreateView):
     form_class = CarroForm
     template_name = 'crear_carro.html'
     success_url = reverse_lazy('listado_carros')
+    success_message = "El carro %(placa)s fue creado exitosamente"
     
-class ActualizarCarro(UpdateView):
+    def form_invalid(self, form):
+        """Se ejecuta cuando el formulario es inválido"""
+        messages.error(self.request, "No se pudo crear el carro. Por favor, revise los datos.")
+        return super().form_invalid(form)
+    
+class ActualizarCarro(SuccessMessageMixin, UpdateView):
     """Clase que permite la ctualización de los datos de un objeto específico.
 
     :param UpdateView: Manejar actualizaciones de objetos.
@@ -53,9 +61,15 @@ class ActualizarCarro(UpdateView):
     form_class = CarroForm
     template_name= 'crear_carro.html'
     success_url = reverse_lazy('listado_carros')
+    success_message = "El carro %(placa)s fue actualizado exitosamente"
+    
+    def form_invalid(self, form):
+        """Se ejecuta cuando el formulario es inválido"""
+        messages.error(self.request, "No se pudo actualizar el carro. Por favor, revise los datos.")
+        return super().form_invalid(form)
     
     
-class EliminarCarro(DeleteView):
+class EliminarCarro(SuccessMessageMixin, DeleteView):
     """Clase que proporcionar una interfaz para la eliminación de un objeto.
 
     :param DeleteView: Gestiona la eliminación de objetos.
@@ -65,3 +79,8 @@ class EliminarCarro(DeleteView):
     model = Carro
     template_name = 'eliminar_carro.html'
     success_url = reverse_lazy('listado_carros')
+    success_message = "El carro fue eliminado exitosamente"
+    
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super().delete(request, *args, **kwargs)
