@@ -5,6 +5,8 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView, D
 from .models import *
 from .forms import *
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
 
 
 class ListaMulta(ListView):
@@ -30,7 +32,8 @@ class VistaMulta(DetailView):
     template_name = 'vista_multa.html'
     success_url = reverse_lazy('multas')
     
-class CrearMulta(CreateView):
+    
+class CrearMulta(SuccessMessageMixin, CreateView):
     """Clase que permite la creación de un nuevo objeto en la base de datos.
 
     :param CreateView: Maneja la creacion de objetos
@@ -41,8 +44,15 @@ class CrearMulta(CreateView):
     form_class = MultasForm
     template_name = 'crear_multa.html'
     success_url = reverse_lazy('listado_multas')
+    success_message = "La multa con %(placa)s fue creado exitosamente"
     
-class ActualizarMulta(UpdateView):
+    def form_invalid(self, form):
+        """Se ejecuta cuando el formulario es inválido"""
+        messages.error(self.request, "No se pudo crear la multa. Por favor, revise los datos.")
+        return super().form_invalid(form)
+    
+    
+class ActualizarMulta(SuccessMessageMixin, UpdateView):
     """Clase que permite la ctualización de los datos de un objeto específico.
 
     :param UpdateView: Manejar actualizaciones de objetos.
@@ -53,9 +63,15 @@ class ActualizarMulta(UpdateView):
     form_class = MultasForm
     template_name= 'crear_multa.html'
     success_url = reverse_lazy('listado_multas')
+    success_message = "La multa con %(placa)s fue actualizada exitosamente"
+    
+    def form_invalid(self, form):
+        """Se ejecuta cuando el formulario es inválido"""
+        messages.error(self.request, "No se pudo actualizar la multa. Por favor, revise los datos.")
+        return super().form_invalid(form)
     
     
-class EliminarMulta(DeleteView):
+class EliminarMulta(SuccessMessageMixin, DeleteView):
     """Clase que proporcionar una interfaz para la eliminación de un objeto.
 
     :param DeleteView: Gestiona la eliminación de objetos.
@@ -65,3 +81,8 @@ class EliminarMulta(DeleteView):
     model = Multas
     template_name = 'eliminar_multa.html'
     success_url = reverse_lazy('listado_multas')
+    success_message = "La multa fue eliminada exitosamente"
+    
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super().delete(request, *args, **kwargs)
