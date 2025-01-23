@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from .models import *
@@ -30,6 +30,7 @@ class VistaMulta(DetailView):
     
     model = Multas
     template_name = 'vista_multa.html'
+    context_object_name = 'multas' 
     success_url = reverse_lazy('multas')
     
     
@@ -84,5 +85,18 @@ class EliminarMulta(SuccessMessageMixin, DeleteView):
     success_message = "La multa fue eliminada exitosamente"
     
     def delete(self, request, *args, **kwargs):
-        messages.success(self.request, self.success_message)
-        return super().delete(request, *args, **kwargs)
+        try:
+            self.object = self.get_object()
+            placa = self.object.placa 
+            result = super().delete(request, *args, **kwargs)
+            messages.success(self.request, f"El carro con placa {placa}s fue eliminado exitosamente")
+            return result
+            
+        except Exception as e:
+            # Si hay algún error durante la eliminación
+            messages.error(
+                self.request, 
+                "No se pudo eliminar la multa. Tiene una relacion."
+            )
+            # Redirigimos de vuelta a la lista de carros
+            return HttpResponseRedirect(self.success_url)

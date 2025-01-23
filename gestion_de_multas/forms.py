@@ -22,7 +22,7 @@ class MultasForm(forms.ModelForm):
             fecha_actual = datetime.now().date()  # Convertimos a date()
             anio_fecha = fecha.date() if isinstance(fecha, datetime) else fecha  # Convertimos anio a date si es datetime
             
-            if anio_fecha > fecha_actual:
+            if anio_fecha < fecha_actual:
                 raise ValidationError('La fecha no puede ser mayor a la fecha actual')
         return fecha
     

@@ -30,7 +30,7 @@ class Propietario(models.Model):
         )
     
     def __str__(self):
-        return str(self.nombre)
+        return self.nombre
 
 class Licencia(models.Model):
     """Clase modelo Licencia para el registro de datos de un Propietario.
@@ -67,7 +67,7 @@ class Licencia(models.Model):
         )
         
     def __str__(self):
-        return str(self.dni.dni) + ' - ' + str(self.nombre.nombre) + ' - ' + str(self.estado)
+        return str(self.dni.dni) + ' - ' + str(self.estado)
     
     @staticmethod
     def listado_propietarios():
