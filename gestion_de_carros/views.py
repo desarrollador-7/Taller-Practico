@@ -85,14 +85,14 @@ class EliminarCarro(SuccessMessageMixin, DeleteView):
             self.object = self.get_object()
             placa = self.object.placa 
             result = super().delete(request, *args, **kwargs)
-            messages.success(self.request, f"El carro con placa {placa}s fue eliminado exitosamente")
+            messages.success(self.request, f"El carro con placa {placa} fue eliminado exitosamente")
             return result
             
         except Exception as e:
             # Si hay algún error durante la eliminación
             messages.error(
                 self.request, 
-                "No se pudo eliminar el carro. Tiene una relacion."
+                f"No se pudo eliminar el carro con placa {placa}. Tiene una relacion."
             )
             # Redirigimos de vuelta a la lista de carros
             return HttpResponseRedirect(self.success_url)

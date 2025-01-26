@@ -13,7 +13,7 @@ class Aseguradora(models.Model):
     id_aseguradora = models.CharField(max_length=50, verbose_name = 'Id*') 
     nombre = models.CharField(max_length=50, verbose_name='Nombre*')
     direccion = models.CharField(max_length=50, verbose_name = 'Direccion*')
-    telefono = models.IntegerField(verbose_name = 'Telefono*')
+    telefono = models.CharField(max_length=50, verbose_name = 'Telefono*')
     email = models.EmailField(max_length=50, verbose_name = 'Email*')
     
     class Meta:

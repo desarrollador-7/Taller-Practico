@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from .models import *
 from .forms import *
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
 
 
 
@@ -32,7 +34,7 @@ class VistaTaller(DetailView):
     template_name = 'vista_taller.html'
     success_url = reverse_lazy('talleres')
     
-class CrearTaller(CreateView):
+class CrearTaller(SuccessMessageMixin, CreateView):
     """Clase que permite la creación de un nuevo objeto en la base de datos.
 
     :param CreateView: Maneja la creacion de objetos
@@ -43,8 +45,14 @@ class CrearTaller(CreateView):
     form_class = TallerForm
     template_name = 'crear_taller.html'
     success_url = reverse_lazy('listado_talleres')
+    success_message = "El Taller fue creado exitosamente"
     
-class ActualizarTaller(UpdateView):
+    def form_invalid(self, form):
+        """Se ejecuta cuando el formulario es inválido"""
+        messages.error(self.request, "No se pudo crear el Taller. Por favor, revise los datos.")
+        return super().form_invalid(form)
+    
+class ActualizarTaller(SuccessMessageMixin, UpdateView):
     """Clase que permite la ctualización de los datos de un objeto específico.
 
     :param UpdateView: Manejar actualizaciones de objetos.
@@ -55,9 +63,15 @@ class ActualizarTaller(UpdateView):
     form_class = TallerForm
     template_name= 'crear_taller.html'
     success_url = reverse_lazy('listado_talleres')
+    success_message = "El Taller fue actualizado exitosamente"
+    
+    def form_invalid(self, form):
+        """Se ejecuta cuando el formulario es inválido"""
+        messages.error(self.request, "No se pudo actualizar el Taller. Por favor, revise los datos.")
+        return super().form_invalid(form)
     
     
-class EliminarTaller(DeleteView):
+class EliminarTaller(SuccessMessageMixin, DeleteView):
     """Clase que proporcionar una interfaz para la eliminación de un objeto.
 
     :param DeleteView: Gestiona la eliminación de objetos.
@@ -67,6 +81,23 @@ class EliminarTaller(DeleteView):
     model = Taller
     template_name = 'eliminar_taller.html'
     success_url = reverse_lazy('listado_talleres')
+    
+    def delete(self, request, *args, **kwargs):
+        try:
+            self.object = self.get_object()
+            nombre = self.object.nombre 
+            result = super().delete(request, *args, **kwargs)
+            messages.success(self.request, f"El Taller {str(nombre)} fue eliminado exitosamente")
+            return result
+            
+        except Exception as e:
+            # Si hay algún error durante la eliminación
+            messages.error(
+                self.request, 
+                f"No se pudo eliminar el Taller {str(nombre)}. Tiene una relacion."
+            )
+            # Redirigimos de vuelta a la lista de carros
+            return HttpResponseRedirect(self.success_url)
 
 
 ####--------Mantenimiento--------####
@@ -93,7 +124,7 @@ class VistaMantenimiento(DetailView):
     template_name = 'vista_mantenimiento.html'
     success_url = reverse_lazy('mantenimientos')
     
-class CrearMantenimiento(CreateView):
+class CrearMantenimiento(SuccessMessageMixin, CreateView):
     """Clase que permite la creación de un nuevo objeto en la base de datos.
 
     :param CreateView: Maneja la creacion de objetos
@@ -104,8 +135,14 @@ class CrearMantenimiento(CreateView):
     form_class = MantenimientoForm
     template_name = 'crear_mantenimiento.html'
     success_url = reverse_lazy('listado_mantenimientos')
+    success_message = "El Mantenimiento fue creado exitosamente"
     
-class ActualizarMantenimiento(UpdateView):
+    def form_invalid(self, form):
+        """Se ejecuta cuando el formulario es inválido"""
+        messages.error(self.request, "No se pudo crear el Mantenimiento. Por favor, revise los datos.")
+        return super().form_invalid(form)
+    
+class ActualizarMantenimiento(SuccessMessageMixin, UpdateView):
     """Clase que permite la ctualización de los datos de un objeto específico.
 
     :param UpdateView: Manejar actualizaciones de objetos.
@@ -116,9 +153,15 @@ class ActualizarMantenimiento(UpdateView):
     form_class = MantenimientoForm
     template_name= 'crear_mantenimiento.html'
     success_url = reverse_lazy('listado_mantenimientos')
+    success_message = "El Mantenimiento fue actualizado exitosamente"
+    
+    def form_invalid(self, form):
+        """Se ejecuta cuando el formulario es inválido"""
+        messages.error(self.request, "No se pudo actualizar el Mantenimiento. Por favor, revise los datos.")
+        return super().form_invalid(form)
     
     
-class EliminarMantenimiento(DeleteView):
+class EliminarMantenimiento(SuccessMessageMixin, DeleteView):
     """Clase que proporcionar una interfaz para la eliminación de un objeto.
 
     :param DeleteView: Gestiona la eliminación de objetos.
@@ -128,3 +171,20 @@ class EliminarMantenimiento(DeleteView):
     model = Mantenimiento
     template_name = 'eliminar_mantenimiento.html'
     success_url = reverse_lazy('listado_mantenimientos')
+    
+    def delete(self, request, *args, **kwargs):
+        try:
+            self.object = self.get_object()
+            idn = self.object.idn 
+            result = super().delete(request, *args, **kwargs)
+            messages.success(self.request, f"El Mantenimiento con id {idn} fue eliminado exitosamente")
+            return result
+            
+        except Exception as e:
+            # Si hay algún error durante la eliminación
+            messages.error(
+                self.request, 
+                f"No se pudo eliminar el Mantenimiento con id {idn}. Tiene una relacion."
+            )
+            # Redirigimos de vuelta a la lista de carros
+            return HttpResponseRedirect(self.success_url)

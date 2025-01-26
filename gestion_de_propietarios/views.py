@@ -88,14 +88,14 @@ class EliminarPropietario(SuccessMessageMixin, DeleteView):
             self.object = self.get_object()
             nombre = self.object.nombre 
             result = super().delete(request, *args, **kwargs)
-            messages.success(self.request, f"El propietario con nombre {nombre} fue eliminado exitosamente")
+            messages.success(self.request, f"El propietario con nombre {str(nombre)} fue eliminado exitosamente")
             return result
             
         except Exception as e:
             # Si hay algún error durante la eliminación
             messages.error(
                 self.request, 
-                "No se pudo eliminar el propietario con nombre {nombre}. Tiene una relacion."
+                f"No se pudo eliminar el propietario con nombre {str(nombre)}. Tiene una relacion."
             )
             # Redirigimos de vuelta a la lista de carros
             return HttpResponseRedirect(self.success_url)
@@ -186,7 +186,7 @@ class EliminarLicencia(SuccessMessageMixin, DeleteView):
             # Si hay algún error durante la eliminación
             messages.error(
                 self.request, 
-                "No se pudo eliminar la licencia con #{numero}. Tiene una relacion."
+                f"No se pudo eliminar la licencia con #{numero}. Tiene una relacion."
             )
             # Redirigimos de vuelta a la lista de carros
             return HttpResponseRedirect(self.success_url)

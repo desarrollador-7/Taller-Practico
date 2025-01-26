@@ -96,7 +96,7 @@ class EliminarMulta(SuccessMessageMixin, DeleteView):
             # Si hay algún error durante la eliminación
             messages.error(
                 self.request, 
-                "No se pudo eliminar la multa. Tiene una relacion."
+                f"No se pudo eliminar la multa con placa {placa}s. Tiene una relacion."
             )
             # Redirigimos de vuelta a la lista de carros
             return HttpResponseRedirect(self.success_url)

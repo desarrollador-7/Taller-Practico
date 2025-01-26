@@ -14,7 +14,7 @@ class Propietario(models.Model):
     nombre = models.CharField(max_length=50, verbose_name = 'Nombre*')
     apellido = models.CharField(max_length=50, verbose_name = 'Apellido*')
     direccion = models.CharField(max_length=50, verbose_name = 'Direccion*')
-    telefono = models.IntegerField(verbose_name = 'Telefono*') 
+    telefono = models.CharField(verbose_name='Telefono*', max_length=20)
     email = models.EmailField(max_length=50, verbose_name = 'Email*')
     
     class Meta:
