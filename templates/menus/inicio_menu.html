@@ -1,0 +1,10 @@
+<li>
+    {% if perms.gestion_de_carros or perms.gestion_de_multas or perms.gestion_de_seguros or perms.gestion_de_taller %}
+        <ul class="nav nav-profile expand" style="display: block;">
+            <li class="nav-header f-s-13 mb-3">Menú principal</li>
+            {%if perms.gestion_de_carros %}
+                {% include "menus/gestion_carros/inicial.html" %}
+            {% endif %}
+        </ul>
+    {% endif %}
+</li>

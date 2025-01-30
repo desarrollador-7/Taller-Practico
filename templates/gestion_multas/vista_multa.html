@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Carro</title>
+    <link rel="stylesheet" href="{% static 'admin/css/vista.css' %}">
+</head>
+<body>
+    <div>
+        <h1>Detalles de la multa</h1>
+        <ul class="lista">
+            <li>Id: {{ multa.dni }}</li>
+            <li>Placa: {{ multa.placa }}</li>
+            <li>Fecha: {{ multa.fecha|date:'d-m-Y'|default:'...' }}</li>
+            <li>Fnfraccion: {{ multa.infraccion }}</li>
+            <li>Total: {{ multa.monto }}</li>
+            <li>Estado: {{ multa.estado }}</li>
+        </ul>
+        <button class="button"><a style="text-decoration: none; color: aliceblue;" href="{% url 'listado_multas' %}">Volver al listado</a></button>
+    </div>
+</body>
+</html>

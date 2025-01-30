@@ -20,4 +20,8 @@ from django.shortcuts import redirect
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("gestion_de_carros/", include("gestion_de_carros.urls")),
+    path("gestion_de_propietarios/", include("gestion_de_propietarios.urls")),
+    path("gestion_de_multas/", include("gestion_de_multas.urls")),
+    path("gestion_de_seguros/", include("gestion_de_seguros.urls")),
+    path("gestion_de_taller/", include("gestion_de_taller.urls")),
 ]

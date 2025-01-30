@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,8 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corsheaders',
+    'bootstrap4',
     'gestion_de_carros',
+    'gestion_de_propietarios',
+    'gestion_de_multas',
+    'gestion_de_seguros',
+    'gestion_de_taller',
     
 ]
 
@@ -57,7 +61,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -81,7 +85,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'gestion_de_carros',  # Cambia por el nombre de tu base de datos
         'USER': 'postgres',                    # Cambia por el nombre de tu usuario de PostgreSQL
-        'PASSWORD': '1234',             # Cambia por tu contraseña
+        'PASSWORD': 'johann1234',             # Cambia por tu contraseña
         'HOST': 'localhost',                  # Cambia por el host si es necesario (por defecto, localhost)
         'PORT': '5432',                       # Cambia el puerto si usas uno personalizado (por defecto, 5432)
     }
@@ -125,6 +129,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

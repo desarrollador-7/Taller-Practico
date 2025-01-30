@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles de la Aseguradora</title>
+    <link rel="stylesheet" href="{% static 'admin/css/vista.css' %}">
+</head>
+<body>
+    <div>
+        <h1>Detalles de la Aseguradora</h1>
+        <ul class="lista">
+            <li>Placa: {{aseguradora.id_aseguradora}}</li>
+            <li>Marca: {{aseguradora.nombre}}</li>
+            <li>Modelo: {{aseguradora.direccion}}</li>
+            <li>Año: {{aseguradora.telefono}}</li>
+            <li>Tipo: {{aseguradora.email}}</li>
+        </ul>
+        <button class="button"><a style="text-decoration: none; color: aliceblue;" href="{% url 'listado_aseguradoras' %}">Volver al listado</a></button>
+    </div>
+</body>
+</html>
