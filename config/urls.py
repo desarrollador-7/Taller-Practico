@@ -16,9 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.shortcuts import redirect
+from gestion_usuarios.views import Login, Inicio
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("ingresar", view=Login.as_view(), name='login'),
+    path("", view=Inicio.as_view(), name='inicio'),
+    
     path("gestion_de_carros/", include("gestion_de_carros.urls")),
     path("gestion_de_propietarios/", include("gestion_de_propietarios.urls")),
     path("gestion_de_multas/", include("gestion_de_multas.urls")),

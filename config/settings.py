@@ -43,8 +43,12 @@ INSTALLED_APPS = [
     'gestion_de_multas',
     'gestion_de_seguros',
     'gestion_de_taller',
+    'gestion_usuarios'
     
 ]
+AUTH_USER_MODEL = 'gestion_usuarios.Usuario'
+LOGIN_REDIRECT_URL = 'login'
+LOGIN_URL = 'login'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -75,9 +79,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
-
-
-# Database
+#Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {

@@ -7,15 +7,27 @@ from braces.views import PermissionRequiredMixin, MultiplePermissionsRequiredMix
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 
-#1. Utilizar los permisos en el views.py 
-#2. Tenemos que crear el html de donde se va a extender el menú
+#1. Utilizar los permisos en el views.py Check
+#2. Tenemos que crear el html de donde se va a extender el menú 
 #3. Mejora: Crear el modelo para gestionar los permisos y los roles. 
 #4. login: para identificar los permisos que tiene cada usuario
 #Tarea: (Listado de roles que se pueden utilizar en esta aplicación)
 
+# Roles
+# Mecanico: puede registrar un servico de mantenimiento
+# Consultar mantenimientos
+# Modificar mantenimientos 
 
+# Cliente: consultar Vehiculo, Consultar mantenimiento, consultar multas, consultar licencia, consultar seguros comprados, detalle seguro, detalle multa
+# Administrador: todos los permisos del sistema. 
+# Asegurador: registrar seguros, consultar seguros, detalle seguro.
+# Agente de Transito: registra multas, consultar las multas, detalle multa
 
-class ListaCarro(MultiplePermissionsRequiredMixin, ListView):
+# Consultas Especiales
+# Consultar vehiculo cliente( placa del vehiculo. propietario, identificación del propietario, multas, seguros comprados, licencia(fecha de vencimiento))
+
+#class ListaCarro(MultiplePermissionsRequiredMixin, ListView):
+class ListaCarro(ListView):
     """Clase para proporcionar una vista que muestra una lista de objetos.
 
     :param ListView: Permite visualizar una vista
@@ -28,7 +40,9 @@ class ListaCarro(MultiplePermissionsRequiredMixin, ListView):
     permissions = {"any": ('gestion_de_carros.listar_carros', 'gestion_de_carros.actualizar_carro', 'gestion_de_carros.eliminar_carro', 'gestion_de_carros.detalle_carro' )}
     
 
-class VistaCarro(PermissionRequiredMixin, DetailView):
+#class VistaCarro(PermissionRequiredMixin, DetailView):
+class VistaCarro(DetailView):
+
     """Clase para mostrar la información detallada de un objeto específico.
 
     :param DetailView: visualiza los detalles de un objeto.
@@ -40,7 +54,8 @@ class VistaCarro(PermissionRequiredMixin, DetailView):
     permission_required = 'gestion_de_carros.detalle_carro'
     success_url = reverse_lazy('carros')
 
-class CrearCarro(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
+#class CrearCarro(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
+class CrearCarro(SuccessMessageMixin, CreateView):
     """Clase que permite la creación de un nuevo objeto en la base de datos.
 
     :param CreateView: Maneja la creacion de objetos
@@ -64,7 +79,8 @@ class CrearCarro(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
             messages.error(self.request, "No se pudo crear el carro. Por favor, revise los datos.")
         return form
         
-class ActualizarCarro(PermissionRequiredMixin,SuccessMessageMixin, UpdateView):
+#class ActualizarCarro(PermissionRequiredMixin,SuccessMessageMixin, UpdateView):
+class ActualizarCarro(SuccessMessageMixin, UpdateView):
     """Clase que permite la ctualización de los datos de un objeto específico.
 
     :param UpdateView: Manejar actualizaciones de objetos.
@@ -88,7 +104,8 @@ class ActualizarCarro(PermissionRequiredMixin,SuccessMessageMixin, UpdateView):
         return self.success_url
     
     
-class EliminarCarro(PermissionRequiredMixin, SuccessMessageMixin, DeleteView):
+#class EliminarCarro(PermissionRequiredMixin, SuccessMessageMixin, DeleteView):
+class EliminarCarro(SuccessMessageMixin, DeleteView):
     """Clase que proporcionar una interfaz para la eliminación de un objeto.
 
     :param DeleteView: Gestiona la eliminación de objetos.

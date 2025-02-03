@@ -1,0 +1,30 @@
+{% load bootstrap4 %}
+{% load static %}
+<html>
+    <head>
+        <title>Iniciar Sesión</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    </head>
+    <body>
+        <div style=" width: 900;  justify-content: center;">
+            {% for msg in menssages %}
+                <div class="alert alert-{% if msg.tags == 'error' %}danger{% else %} {{msg.tags}}{% endif %}" style="text-align: center; vertical-align: middle;">
+                    {{ msg|safe }}
+                </div>
+            {% endfor %}
+            <form class="margin-bottom-0 mt-4" action="" method="post" >{% csrf_token %}
+                <div class=" col-4" >
+                <label for="">Usuario </label>
+                {{form.username}}
+                <label for="">Contraseña</label>
+                {{form.password}}
+                </div>
+                <br>
+                <div class=" col-4" >
+                    <button class="btn btn-primary btn-block" type="submit"> Iniciar Sesión</button>
+                </div>
+            </form>
+
+        </div>
+    </body>
+</html>
