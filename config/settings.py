@@ -85,9 +85,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'gestion_de_carros',  # Cambia por el nombre de tu base de datos
+        'NAME': 'gestion_transito',  # Cambia por el nombre de tu base de datos
         'USER': 'postgres',                    # Cambia por el nombre de tu usuario de PostgreSQL
-        'PASSWORD': 'johann1234',             # Cambia por tu contraseña
+        'PASSWORD': '1234',             # Cambia por tu contraseña
         'HOST': 'localhost',                  # Cambia por el host si es necesario (por defecto, localhost)
         'PORT': '5432',                       # Cambia el puerto si usas uno personalizado (por defecto, 5432)
     }
