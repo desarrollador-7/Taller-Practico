@@ -5,7 +5,7 @@ from django.views.generic import FormView, CreateView, UpdateView, ListView, Tem
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from django.contrib import messages
-from django.contrib.auth import logout
+from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.decorators import login_required 
 
 
@@ -24,7 +24,23 @@ class Login(FormView):
         usuario = self.request.user
         if usuario is not None:
             if  not usuario.is_staff and not usuario.is_superuser:
-                messages.success(self.request, "Sesión inicia correctamente")
+                login(self.request, usuario)
+                siguiente = self.request.GET.get("next", None)
+                self.success_url = self.success_url if siguiente is None else siguiente
+                messages.success(self.request, "Sesión iniciada correctamente!")
+                return super(Login, self).form_valid(form)
+            if usuario.is_active:
+                    login(self.request, usuario)
+                    siguiente = self.request.GET.get("next", None)
+                    self.success_url = self.success_url if siguiente is None else siguiente
+                    messages.success(self.request, "Sesión iniciada correctamente.")
+                    return super(Login, self).form_valid(form)
+            else:
+                mensaje = "El Usuario %s no se encuentra Activo." % usuario.username
+        else:
+                mensaje = "El Usuario no existe o la Contraseña es incorrecta."
+        form.add_error('username', mensaje)
+        messages.error(self.request, mensaje)
         return super(Login, self).form_valid(form)
     
     def form_invalid(self, form):

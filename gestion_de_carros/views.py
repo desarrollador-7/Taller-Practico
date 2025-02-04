@@ -26,8 +26,8 @@ from django.contrib import messages
 # Consultas Especiales
 # Consultar vehiculo cliente( placa del vehiculo. propietario, identificación del propietario, multas, seguros comprados, licencia(fecha de vencimiento))
 
-#class ListaCarro(MultiplePermissionsRequiredMixin, ListView):
-class ListaCarro(ListView):
+class ListaCarro(MultiplePermissionsRequiredMixin, ListView):
+#class ListaCarro(ListView):
     """Clase para proporcionar una vista que muestra una lista de objetos.
 
     :param ListView: Permite visualizar una vista
@@ -40,8 +40,8 @@ class ListaCarro(ListView):
     permissions = {"any": ('gestion_de_carros.listar_carros', 'gestion_de_carros.actualizar_carro', 'gestion_de_carros.eliminar_carro', 'gestion_de_carros.detalle_carro' )}
     
 
-#class VistaCarro(PermissionRequiredMixin, DetailView):
-class VistaCarro(DetailView):
+class VistaCarro(PermissionRequiredMixin, DetailView):
+#class VistaCarro(DetailView):
 
     """Clase para mostrar la información detallada de un objeto específico.
 
@@ -54,8 +54,8 @@ class VistaCarro(DetailView):
     permission_required = 'gestion_de_carros.detalle_carro'
     success_url = reverse_lazy('carros')
 
-#class CrearCarro(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
-class CrearCarro(SuccessMessageMixin, CreateView):
+class CrearCarro(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
+#class CrearCarro(SuccessMessageMixin, CreateView):
     """Clase que permite la creación de un nuevo objeto en la base de datos.
 
     :param CreateView: Maneja la creacion de objetos
@@ -79,8 +79,8 @@ class CrearCarro(SuccessMessageMixin, CreateView):
             messages.error(self.request, "No se pudo crear el carro. Por favor, revise los datos.")
         return form
         
-#class ActualizarCarro(PermissionRequiredMixin,SuccessMessageMixin, UpdateView):
-class ActualizarCarro(SuccessMessageMixin, UpdateView):
+class ActualizarCarro(PermissionRequiredMixin,SuccessMessageMixin, UpdateView):
+#class ActualizarCarro(SuccessMessageMixin, UpdateView):
     """Clase que permite la ctualización de los datos de un objeto específico.
 
     :param UpdateView: Manejar actualizaciones de objetos.
@@ -104,8 +104,8 @@ class ActualizarCarro(SuccessMessageMixin, UpdateView):
         return self.success_url
     
     
-#class EliminarCarro(PermissionRequiredMixin, SuccessMessageMixin, DeleteView):
-class EliminarCarro(SuccessMessageMixin, DeleteView):
+class EliminarCarro(PermissionRequiredMixin, SuccessMessageMixin, DeleteView):
+#class EliminarCarro(SuccessMessageMixin, DeleteView):
     """Clase que proporcionar una interfaz para la eliminación de un objeto.
 
     :param DeleteView: Gestiona la eliminación de objetos.
