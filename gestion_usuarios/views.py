@@ -65,7 +65,7 @@ class Inicio(TemplateView):
             return redirect('login')
         return super(Inicio, self).get(request *args, **kwargs)
 
-
+######-------Crud del Usuaio-------######
 class ListaUsuario(ListView):
     """Clase para proporcionar una vista que muestra una lista de objetos.
 
@@ -169,4 +169,100 @@ class EliminarUsuario(SuccessMessageMixin, DeleteView):
                 f"No se pudo eliminar el Usuario con identificacion, {identificacion}. Tiene una relacion."
             )
             # Redirigimos de vuelta a la lista de carros
+            return HttpResponseRedirect(self.success_url)
+
+
+
+######-------Crud de los roles-------######
+
+class ListaRoles(ListView):
+    """Clase para proporcionar una vista que muestra una lista de objetos.
+
+    :param ListView: Permite visualizar una vista
+    :type ListView: Objeto
+    """       
+    
+    model = Group
+    template_name = 'gestion_roles/listado_roles.html'
+    context_object_name = 'roles' 
+    permissions = {"any": ('gestion_roles.registrar_rol','gestion_roles.actualizar_rol','gestion_roles.eliminar_rol','gestion_usuarios.registrar_usuario', 'gestion_usuarios.consultar_usuarios', 'gestion_usuarios.actualizar_usuario', 'gestion_usuarios.eliminar_usuario' , 'gestion_usuarios.detalle_usuario' )}
+
+
+
+class CrearRol(SuccessMessageMixin, CreateView):
+    """Clase que permite la creación de un nuevo objeto en la base de datos.
+
+    :param CreateView: Maneja la creacion de objetos
+    :type CreateView: Objeto
+    """    
+    
+    model = Group
+    form_class = RolForm
+    template_name = 'gestion_roles/registrar_rol.html'
+    permission_required = 'gestion_roles.registrar_rol'
+    success_url = reverse_lazy('listado_roles')
+    success_message = "El Rol, fue creado exitosamente"
+    
+    def form_invalid(self, form):
+        """Se ejecuta cuando el formulario es inválido"""
+        form = super().form_invalid(form)
+        try:
+            if form:
+                messages.success(self.request, self.success_message)
+        except Exception:
+            messages.error(self.request, "No se pudo crear el Rol. Por favor, revise los datos.")
+
+
+
+class ActualizarRol(SuccessMessageMixin, UpdateView):
+    """Clase que permite la ctualización de los datos de un objeto específico.
+
+    :param UpdateView: Manejar actualizaciones de objetos.
+    :type UpdateView: Objeto
+    """       
+    
+    model = Group
+    form_class = RolForm
+    template_name= 'gestion_roles/registrar_rol.html'
+    permission_required = 'gestion_roles.registrar_rol'
+    success_url = reverse_lazy('listado_roles')
+    success_message = "El Rol, fue actualizado exitosamente"
+    
+    def form_invalid(self, form):
+        """Se ejecuta cuando el formulario es inválido"""
+        messages.error(self.request, "No se pudo actualizar el Rol. Por favor, revise los datos.")
+        return super().form_invalid(form)
+    
+    def get_success_url(self):
+        messages.success(self.request, self.success_message)
+        return self.success_url
+
+
+class EliminarRol(SuccessMessageMixin, DeleteView):
+    """Clase que proporcionar una interfaz para la eliminación de un objeto.
+
+    :param DeleteView: Gestiona la eliminación de objetos.
+    :type DeleteView: Objeto
+    """       
+    
+    model = Group
+    template_name = 'gestion_roles/eliminar_rol.html'
+    permission_required = 'gestion_roles.eliminar_rol'
+    success_url = reverse_lazy('listado_roles')
+    
+    def delete(self, request, *args, **kwargs):
+        try:
+            self.object = self.get_object()
+            identificacion = self.object.identificacion 
+            result = super().delete(request, *args, **kwargs)
+            messages.success(self.request, f"El Rol fue eliminado exitosamente")
+            return result
+            
+        except Exception:
+            # Si hay algún error durante la eliminación
+            messages.error(
+                self.request, 
+                f"No se pudo eliminar el Rol. Tiene una relacion."
+            )
+            # Redirigimos de vuelta a la lista
             return HttpResponseRedirect(self.success_url)
