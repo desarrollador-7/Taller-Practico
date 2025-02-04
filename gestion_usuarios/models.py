@@ -42,6 +42,10 @@ class Usuario(AbstractUser):
     
     def __str__(self):
         return self.first_name + self.last_name 
+    def save(self, *args, **kwargs):
+        self.username = self.email
+        self.password = self.first_name + self.last_name + '-' + str(self.identificacion)
+        super(Usuario, self).save(*args, **kwargs)
     
     
 class Roles(models.Model):

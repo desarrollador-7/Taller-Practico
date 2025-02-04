@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("ingresar", view=Login.as_view(), name='login'),
     path("", view=Inicio.as_view(), name='inicio'),
+    path("gestion_usuarios/", include("gestion_usuarios.urls")),
     
     path("gestion_de_carros/", include("gestion_de_carros.urls")),
     path("gestion_de_propietarios/", include("gestion_de_propietarios.urls")),

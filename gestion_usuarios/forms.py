@@ -5,12 +5,21 @@ from django.db.models import Case, When
 from .listado_permisos import LISTADO_PERMISOS
 
 class RegistrarUsuarioForm(forms.ModelForm):
+    def __init__ (self, *args, **kwargs):
+        super(RegistrarUsuarioForm, self).__init__(*args, **kwargs)
+        self.instancia = kwargs.get('instance', None)
+        #self.fields['groups'].required = True
+        orden_permisos = Case(*[When(codename=codename, then=pos) for pos, codename in enumerate(LISTADO_PERMISOS)])
+        self.fields['user_permissions'].label = "Permisos Adicionales del Usuario"
+        self.fields["user_permissions"].queryset = self.fields["user_permissions"].queryset.filter(codename__in=LISTADO_PERMISOS)\
+            .order_by(orden_permisos)
+            
     class Meta:
         model = Usuario
         fields = ('tipo_identificacion', 'identificacion', 
                   'first_name', 'last_name',
                   'email','genero', 'ciudad', 
-                  'telefono', 'groups' )
+                  'telefono', 'user_permissions' )
         widgets = {
             'tipo_identificacion': forms.Select(attrs={ 'width': "60%", 'col': "4", 'class':'form-control'}),
             'identificacion': forms.TextInput(attrs={'width': "60%", 'col': "4",'class':'form-control'}),
@@ -20,7 +29,7 @@ class RegistrarUsuarioForm(forms.ModelForm):
             'genero': forms.Select(attrs={'width': "60%", 'col': "4",'class':'form-control'}),
             'ciudad': forms.TextInput(attrs={'width': "60%", 'col': "4",'class':'form-control'}),
             'telefono': forms.NumberInput(attrs={'width': "60%", 'col': "4",'class':'form-control'}),
-            'groups': forms.Select(attrs={'width': "60%", 'col': "4",'class':'form-control'}),
+            'user_permissions': forms.SelectMultiple(attrs={'width': "60%", 'col': "4",'class':'form-control'}),
         }
         
         def clean_email(self):
@@ -62,7 +71,7 @@ class RolForm(forms.ModelForm):
         super(RolForm, self).__init__(*args, **kwargs)
         self.fields["name"].label = "Nombre del Rol"
         orden_permisos = Case(*[When(codename=codename, then=pos) for pos, codename in enumerate(LISTADO_PERMISOS)])
-        self.fields["permissions"].queryset =    self.fields["permissions"].queryset.filter(codename__in=LISTADO_PERMISOS)\
+        self.fields["permissions"].queryset =self.fields["permissions"].queryset.filter(codename__in=LISTADO_PERMISOS)\
             .order_by(orden_permisos) 
         self.fields["permissions"].label = "Permisos Asignados al Rol"
         

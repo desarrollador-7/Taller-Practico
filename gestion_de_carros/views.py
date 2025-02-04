@@ -74,7 +74,7 @@ class CrearCarro(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
         form = super().form_invalid(form)
         try:
             if form:
-               messages.success(self.request, self.success_message)
+                messages.success(self.request, self.success_message)
         except Exception:
             messages.error(self.request, "No se pudo crear el carro. Por favor, revise los datos.")
         return form
